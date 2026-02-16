@@ -9,10 +9,13 @@ export enum StyleMusical {
     BLUES = "Blues",
     COUNTRY = "Country",
     METAL = "Metal",
-    FOLK = "Folk"
+    FOLK = "Folk",
+    FUNK = "Funk",
+    AFRO = "Afro",
 }
 
 export interface Chanson {
+    id: number;
     titre: string;
     artiste: string;
     duree: number;
