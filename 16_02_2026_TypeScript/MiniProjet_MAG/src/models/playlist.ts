@@ -27,6 +27,10 @@ export class Playlist {
             (total, chanson) => total + chanson.duree,
             0
         );
+        return this.typageduree(totalSecondes);
+    }
+
+    public typageduree(totalSecondes: number): string {
         const minutes = Math.floor(totalSecondes / 60);
         const secondes = totalSecondes % 60;
         return `${minutes} m ${secondes.toString().padStart(2, "0")} s`;
