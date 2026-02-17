@@ -24,3 +24,4 @@ public/
 
 # Ignore files generated for development
 0_intro.md
+*_intro.md
