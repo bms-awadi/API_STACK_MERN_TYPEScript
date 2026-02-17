@@ -25,7 +25,6 @@ function App() {
     }
   };
 
-  // handleCreate
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (inputValue.trim() === '') {
@@ -54,7 +53,6 @@ function App() {
     }
   };
 
-
   const handleDelete = async (id: number) => {
     try {
       await deleteTask(id);
@@ -75,35 +73,85 @@ function App() {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Nouvelle tâche"
-        ></input>
-        <button type="submit">Ajouter</button>
+          style={{
+            padding: '10px',
+            fontSize: '16px',
+            border: '2px solid #4CAF50',
+            borderRadius: '4px',
+            height: '44px',
+            boxSizing: 'border-box',
+            backgroundColor: 'white',
+            color: 'black',
+          }}
+        />
+        <button
+          type="submit"
+          style={{
+            padding: '10px 20px',
+            fontSize: '16px',
+            backgroundColor: '#4CAF50',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            height: '44px',
+          }}
+        >
+          Ajouter
+        </button>
       </form>
-      {/* État de chargement */}
+
       {loading && <p>Chargement...</p>}
       {!loading && tasks.length === 0 && <p>Aucune tâche pour le moment.</p>}
-      {/* Liste des tâches */}
+
       <ul>
         {tasks.map((task) => (
-          <div key={task.id}>
-            {/*Si isDone est true : la tache est barré.*/}
-            <span style={{ textDecoration: task.isDone ? 'line-through' : 'none' }}>
+          <div key={task.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+            <span style={{
+              textDecoration: task.isDone ? 'line-through' : 'none',
+              color: 'black',
+              fontSize: '18px',
+              flexGrow: 1,
+            }}>
               {task.label}
             </span>
-
-
-            <button onClick={() => handleToggle(task.id, task.label, task.isDone)}>Toggle</button>
-            <button onClick={() => handleDelete(task.id)}>Supprimer</button>
+            <div style={{ display: 'flex', gap: '8px', marginLeft: '10px' }}>
+              <button
+                onClick={() => handleToggle(task.id, task.label, task.isDone)}
+                style={{
+                  padding: '8px 16px',
+                  fontSize: '15px',
+                  cursor: 'pointer',
+                  backgroundColor: '#200fe0',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                }}
+              >
+                Toggle
+              </button>
+              <button
+                onClick={() => handleDelete(task.id)}
+                style={{
+                  padding: '8px 16px',
+                  fontSize: '15px',
+                  cursor: 'pointer',
+                  backgroundColor: '#ff4444',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                }}
+              >
+                Supprimer
+              </button>
+            </div>
           </div>
         ))}
       </ul>
 
-      {/* Affichage des erreurs */}
       {error && <p className="error">{error}</p>}
     </div>
   );
 }
 
 export default App;
-
-
-
