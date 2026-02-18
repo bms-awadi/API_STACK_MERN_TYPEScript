@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import Movie from "../models/movie.model";
 
-// GET tous les films
 export const getAllMovies = async (req: Request, res: Response): Promise<void> => {
     try {
         const movies = await Movie.find();
@@ -11,10 +10,9 @@ export const getAllMovies = async (req: Request, res: Response): Promise<void> =
     }
 };
 
-// GET un film par ID
 export const getMovieById = async (req: Request, res: Response): Promise<void> => {
     try {
-        const movie = await Movie.findById(req.params.id);
+        const movie = await Movie.findById(req.params.id); // _id -> id
         if (movie) {
             res.json(movie);
         } else {
@@ -25,7 +23,6 @@ export const getMovieById = async (req: Request, res: Response): Promise<void> =
     }
 };
 
-// POST créer un nouveau film
 export const createMovie = async (req: Request, res: Response): Promise<void> => {
     try {
         const newMovie = new Movie(req.body);
@@ -36,10 +33,9 @@ export const createMovie = async (req: Request, res: Response): Promise<void> =>
     }
 };
 
-// PUT mettre à jour un film
 export const updateMovie = async (req: Request, res: Response): Promise<void> => {
     try {
-        const updatedMovie = await Movie.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updatedMovie = await Movie.findByIdAndUpdate(req.params.id, req.body, { new: true }); // _id -> id
         if (updatedMovie) {
             res.json(updatedMovie);
         } else {
@@ -50,10 +46,9 @@ export const updateMovie = async (req: Request, res: Response): Promise<void> =>
     }
 };
 
-// DELETE supprimer un film
 export const deleteMovie = async (req: Request, res: Response): Promise<void> => {
     try {
-        const deletedMovie = await Movie.findByIdAndDelete(req.params.id);
+        const deletedMovie = await Movie.findByIdAndDelete(req.params.id); // _id -> id
         if (deletedMovie) {
             res.json({ message: "Movie deleted" });
         } else {
